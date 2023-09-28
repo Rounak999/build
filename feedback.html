@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
-  <meta charset="utf-8">
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Complete Website Layout</title>
 		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -14,43 +13,44 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 	<link href="style.css" rel="stylesheet">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
-
-input[type=text], select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  resize: vertical;
-}
-
-input[type=submit] {
-  background-color: #04AA6D;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type=submit]:hover {
-  background-color: #45a049;
-}
-
-.container {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
-</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
+    
+    input[type=text], select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
+    }
+    
+    input[type=submit] {
+      background-color: #04AA6D;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+    
+    .container {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+    </style>
 </head>
 <body>
+	
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 	<div class="container-fluid">
@@ -66,7 +66,7 @@ input[type=submit]:hover {
 					<a class="nav-link" href="code.html">Code</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Feedback</a>
+					<a class="nav-link" href="feedback.html">Feedback</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="contact.html">Contact</a>
@@ -116,31 +116,56 @@ input[type=submit]:hover {
 	</div>
 </div>
 
-<br>
-<center><h1>Contact Form</h1></center>
 
+<center><h1>Feedback Form</h1></center>
 <div class="container">
  
-  <form action="action_page.php">
-    <label for="fname">First Name</label>
-    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" placeholder="Description" style="height:200px"></textarea>
+      <br>
+        <label for="file">Choose a JPEG/PNG File:</label>
+        <input type="file" name="file" id="file" required>
+        <br>
+  <br>
+      <input type="submit" value="Upload File">
+    </form>
+    <br>
+    <!-- Display response here -->
+    <div id="response"></div>
+  </div>
 
-    <label for="lname">Last Name</label>
-    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
 
-    <label for="country">Country</label>
-    <select id="country" name="country">
-      <option value="australia">Australia</option>
-      <option value="canada">Canada</option>
-      <option value="usa">USA</option>
-    </select>
+  <!-- JavaScript to handle response -->
+  <script>
+      // Function to update the response element with the received response
+      function updateResponse(responseText) {
+          const responseDiv = document.getElementById("response");
+          responseDiv.innerHTML = responseText;
+      }
 
-    <label for="subject">Subject</label>
-    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+      // Add an event listener to the form to handle the response
+      const form = document.querySelector("form");
+      form.addEventListener("submit", function (e) {
+          e.preventDefault(); // Prevent the form from submitting normally
 
-    <input type="submit" value="Submit">
-  </form>
-</div>
+          // Create a FormData object to send the form data
+          const formData = new FormData(form);
+
+          // Send a POST request to upload.php
+          fetch("upload.php", {
+              method: "POST",
+              body: formData
+          })
+          .then(response => response.text())
+          .then(data => {
+              updateResponse(data); // Update the response element with the received data
+          })
+          .catch(error => {
+              console.error("Error:", error);
+          });
+      });
+  </script>
 
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
