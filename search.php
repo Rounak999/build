@@ -23,7 +23,7 @@ if( isset( $_GET[ 'url' ]  ) ) {
 	}
 
 	// Feedback for the end user
-	echo "<pre>" . $cmd . "</pre>";
+//	echo "<pre>" . $cmd . "</pre>";
 }
 
 ?>
