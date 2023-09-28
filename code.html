@@ -87,16 +87,20 @@
 		data-aos-duration="1000">
 	<div class="row welcome text-center">
 		<div class="col-12">
-			<p class="lead"><script>
-                $(document).ready(function(){
-                    $.ajax({
-                        url: "code.php",
-                        success: function(result){
-                            $("#div1").html(result);
-                        }
+			<p class="lead">
+                <script>
+                    window.addEventListener('DOMContentLoaded', function() {
+                        var xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                document.getElementById('div1').innerHTML = xhr.responseText;
+                            }
+                        };
+                        xhr.open('GET', 'code.php', true);
+                        xhr.send();
                     });
-                });
-            </script></p>
+                </script>
+            </p>
 		</div>
 	</div>
 </div>
