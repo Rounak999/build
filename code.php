@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['HTTP_X_ORIGINAL_URL'] === '127.0.0.1') {
+if ($_SERVER['HTTP_X_REMOTE_IP'] === '127.0.0.1') {
     echo 'SALARY KITNA LOGE DISCUSS KARLE';
 } else {
     http_response_code(403);
