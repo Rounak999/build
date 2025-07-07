@@ -198,6 +198,9 @@ $substitutions = array(
 'alert' => 'nono',
 'prompt' => 'nono',
 'confirm' => 'nono',
+'eval' => 'nono',
+'print' => 'nono',
+'onerror' => 'nono',
 
 	);
 
