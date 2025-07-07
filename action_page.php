@@ -3,7 +3,7 @@
 header ("X-XSS-Protection: 0");
 if( isset( $_GET[ 'firstname' ]  ) ) {
 	// Get input
-	$check = $_REQUEST[ 'firstname' ];
+	$check = strtolower($_REQUEST[ 'firstname' ]);
 	// Feedback for the end user
 $substitutions = array(
 		'<script>' => 'nono',
